@@ -25,13 +25,14 @@ function encriptar(e) {
     e.preventDefault();
     
     let palabra = document.querySelector('#formulario textarea').value;
-
+    
     if(palabra.trim() === '') {
         showAlert('El contenido esta vacio...!!!');
         return;
     }
 
     if(!sonMinusculas(palabra)){
+        console.log(palabra)
         showAlert('Solo letras minusculas y sin acentos...!')
         return;
     }
@@ -78,15 +79,17 @@ function showAlert( mensaje ){
     const alerta = document.createElement('p');
     alerta.style.color = 'red';
     alerta.style.fontWeight = '600';
+    
     alerta.textContent = mensaje;
 
     div.style.backgroundColor = '#ffffff';
     div.style.padding = '10px';
     div.style.textAlign = 'center';
     div.style.margin = '10px';
-    div.style.width = '100%';
+    div.style.gridColumn = '1 / 3';
     div.id = 'alerta'
 
+    document.querySelector('.btns p').style.display = 'none';
     div.appendChild(alerta);
     container.prepend(div);
 
@@ -127,5 +130,6 @@ function clearHTML( contenedor ) {
 }
 
 function sonMinusculas(palabra) {
-    return /^[a-z]+$/.test(palabra);
+    
+    return palabra.split(' ').every(word => /^[a-z]+$/.test(word));
 }
